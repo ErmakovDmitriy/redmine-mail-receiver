@@ -25,7 +25,7 @@ fi
 COMMAND=""
 
 if [ "$REDMINE_MAIL_RECEIVER_PROTOCOL" = "IMAP" ]; then
-    COMMAND="rake redmine:email:receive_imap "
+    COMMAND="rake redmine:email:receive_imap --trace "
 
     if [ "$REDMINE_MAIL_RECEIVER_IMAP_FOLDER" != "" ]; then
         COMMAND="$COMMAND folder=\"$REDMINE_MAIL_RECEIVER_IMAP_FOLDER\" "
@@ -40,7 +40,7 @@ if [ "$REDMINE_MAIL_RECEIVER_PROTOCOL" = "IMAP" ]; then
     fi    
 
 elif [ "$REDMINE_MAIL_RECEIVER_PROTOCOL" = "IMAP" ]; then
-    COMMAND="rake redmine:email:receive_pop3 "
+    COMMAND="rake redmine:email:receive_pop3 --trace "
     
     if [ "$REDMINE_MAIL_RECEIVER_POP3_DELETE_UNPROCESSED" != "" ]; then
         COMMAND="$COMMAND delete_unprocessed=\"$REDMINE_MAIL_RECEIVER_POP3_DELETE_UNPROCESSED\" "
@@ -116,6 +116,9 @@ if [ "$REDMINE_MAIL_RECEIVER_ALLOW_OVERRIDE" != "" ]; then
     COMMAND="$COMMAND allow_override=\"$REDMINE_MAIL_RECEIVER_ALLOW_OVERRIDE\" "
 fi
 
-
+echo "Start rake receive email process"
 # Execute command
 eval $COMMAND
+echo "Email receiveing completed"
+
+exit 0

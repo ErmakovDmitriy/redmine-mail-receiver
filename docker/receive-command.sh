@@ -28,7 +28,7 @@ if [ "$REDMINE_MAIL_RECEIVER_PROTOCOL" = "IMAP" ]; then
     COMMAND="rake redmine:email:receive_imap "
 
     if [ "$REDMINE_MAIL_RECEIVER_IMAP_FOLDER" != "" ]; then
-        COMMAND="$COMMAND receive_imap folder=\"$REDMINE_MAIL_RECEIVER_IMAP_FOLDER\" "
+        COMMAND="$COMMAND folder=\"$REDMINE_MAIL_RECEIVER_IMAP_FOLDER\" "
     fi
 
     if [ "$REDMINE_MAIL_RECEIVER_IMAP_MOVE_ON_SUCCESS" != "" ]; then

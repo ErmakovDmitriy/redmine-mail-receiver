@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [ $REDMINE_MAIL_RECEIVER_DEBUG ]; then 
+    set -x
+fi
+
 # Perform basic validation
 if [ "$REDMINE_MAIL_RECEIVER_HOST" = "" ]; then
     echo "Envar REDMINE_MAIL_RECEIVER_HOST undefined"
@@ -115,6 +119,13 @@ fi
 if [ "$REDMINE_MAIL_RECEIVER_ALLOW_OVERRIDE" != "" ]; then
     COMMAND="$COMMAND allow_override=\"$REDMINE_MAIL_RECEIVER_ALLOW_OVERRIDE\" "
 fi
+
+if [ $REDMINE_MAIL_RECEIVER_DEBUG ]; then 
+    echo "Unsecure printing mail receiving command"
+    echo $COMMAND
+    echo ""
+fi
+
 
 echo "Start rake receive email process"
 # Execute command
